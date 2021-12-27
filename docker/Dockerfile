@@ -10,5 +10,6 @@ RUN \
     mpi4py \
     keras-tuner \ 
     scikit-learn \
+    transformers \ 
     tensorboard-plugin-profile==2.4.0 \
     gitpython==3.1.17
