@@ -11,5 +11,6 @@ RUN \
     keras-tuner \ 
     scikit-learn \
     transformers \ 
+    datasets \
     tensorboard-plugin-profile==2.4.0 \
     gitpython==3.1.17
