@@ -291,9 +291,9 @@ nuanced_feelings = list(map(str.lower,nuanced_feelings))
 
 pain_joy = ['joy','pain']
 
-base_feelings = ['grief','sadness','angry','mad','confused','hungry','thirsty','warm','cold',
-                 'playful','amused','scared','afraid','exhausted','peacful','calm','tranquil','eager',
-                 'excited','aggravated','frustrated','affectionate','appreciative','tender','pain','shame','grateful','anxious']
+base_feelings = ['grief','relief', 'sadness','angry','mad','confused','hungry','thirsty','warm','cold',
+                 'playful','amused','scared','afraid','exhausted','peaceful','calm','tranquil','eager',
+                 'excited','aggravated','frustrated','affectionate','appreciative','tender','pain','shame','grateful','anxious','disgust']
 
 my_list = []
 for feeling in nuanced_feelings:
