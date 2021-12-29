@@ -289,7 +289,9 @@ nuanced_feelings = ["AFFECTIONATE",
 
 nuanced_feelings = list(map(str.lower,nuanced_feelings))
 
-base_feelings = ['joy','grief','sadness','angry','mad','confused','hungry','thirsty','warm','cold',
+pain_joy = ['joy','pain']
+
+base_feelings = ['grief','sadness','angry','mad','confused','hungry','thirsty','warm','cold',
                  'playful','amused','scared','afraid','exhausted','peacful','calm','tranquil','eager',
                  'excited','aggravated','frustrated','affectionate','appreciative','tender','pain','shame','grateful','anxious']
 
