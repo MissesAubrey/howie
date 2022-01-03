@@ -39,17 +39,14 @@ def main():
 
     num_feelings = 5
     num_needs = 5
-    #original_sequence = "The little pup came over and started biting my sleeve for food."
-    original_sequence = "I just passed my last clinical residency and will graduate in February."
-    #hypothesis_template = "I feel {}."
     hypothesis_template = "Am I feeling {}?"
-    feelings_results = classifier(original_sequence, feelings.base_feelings, hypothesis_template=hypothesis_template, multi_label=True)
+    feelings_results = classifier(input_string, feelings.base_feelings, hypothesis_template=hypothesis_template, multi_label=True)
     feelings_results['labels'][:5]
     used_needs = set()
     updated_needs = needs.needs
-    print("When I hear "+ original_sequence + " do I feel ")
+    print("When I hear "+ input_string + " do I feel ")
     for idx, feeling in enumerate(feelings_results['labels'][:num_feelings]):
-        sequence = "When I hear "+original_sequence+" do I feel "+feeling
+        sequence = "When I hear "+input_string+" do I feel "+feeling
         hypothesis_template = "because I have a need for {}?"
         need_results = classifier(sequence, list(updated_needs), hypothesis_template=hypothesis_template,multi_label=True)
         used_needs = used_needs.union(need_results['labels'][:num_needs])
