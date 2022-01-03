@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Chat Room</title>
+</head>
+<body>
+    <textarea id="chat-log" cols="100" rows="20"></textarea><br>
+    <input id="chat-message-input" type="text" size="100"><br>
+    <!--- <input id="chat-message-submit" type="button" value="Send"> -->
+
+    <label for="n_feelings">Number of feelings</label>
+
+    <select name="n_feelings" id="n_feelings">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="4">5</option>
+    </select>
+
+    <label for="n_needs">Number of needs</label>
+
+    <select name="n_needs" id="n_needs">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="4">5</option>
+    </select>
+
+
+    <p><a href="{% url 'home' %}">Home</a></p>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+
+            function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+          }
+          const csrftoken = getCookie('csrftoken');
+
+            const chatlog = document.getElementById("chat-log")
+            const inputField = document.getElementById("chat-message-input")
+            const num_feelings = document.getElementById("n_feelings")
+            const num_needs = document.getElementById("n_needs")
+            inputField.addEventListener("keydown", function(e) {
+                if (e.code === "Enter") {
+                    let input = inputField.value;
+                    chatlog.value += (inputField.value + '\n\n');
+
+                    //const xhttp = new XMLHttpRequest();
+                    //xhttp.onload = function() {
+                    //    chatlog.value  += this.responseText;
+                    //    }
+                    //xhttp.open("POST", "guess", true);
+                    //xhttp.send("body=test");
+                    
+                    //#############
+                    const request = new Request(
+                        "guess",
+                        {
+                            method: 'POST',
+                            headers:{
+                                        'Accept': 'application/json',
+                                        'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+                                        'X-CSRFToken': csrftoken,
+                                    },
+                            credentials: 'same-origin', // Do not send CSRF token to another domain.
+                            body:JSON.stringify({
+                                    'story': inputField.value,
+                                    'num_feelings': num_feelings.value,
+                                    'num_needs': num_needs.value,
+                                })
+                        }
+                        );
+                        fetch(request)
+                        .then(function(response) {return response.json()})
+                        .then(function(data) {chatlog.value += data.my_data +"\n"})
+                        .then(function(){chatlog.scrollTop = chatlog.scrollHeight});
+                        
+                    //#############
+                    inputField.value = "";
+
+                }
+            });
+        });
+    </script>
+</body>
+</html>

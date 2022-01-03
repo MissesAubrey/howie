@@ -34,7 +34,7 @@ setuptools.setup(
 
     entry_points={
         'console_scripts': [
-            'keras_train = howie.keras_train:main',
+            'giraffe_ears = howie.zero_shot_feelings:main',
         ],
     },
 )

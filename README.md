@@ -21,8 +21,17 @@ GPU: NVIDIA(R) GeForce(R) RTX 2060 SUPER(TM) 8GB GDDR6
     make start-docker-container
     make log-into-continer
 
+    #outside the docker container
+    docker run -p 6379:6379 -d redis:5
+
     #inside the docker container
-   
+    giraffe_ears "My pup was biting my sleeve while I was working because it was dinner time"
+
+    #inside docker container, start the web app to allow other people to eventually use
+    cd mysite
+    python manage.py runserver 0:80
+    
+    
 
     # the jupyter port is 8888
     # inspect the contents of jupyter_token.txt for the token to log-in
