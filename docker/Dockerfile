@@ -1,5 +1,5 @@
 FROM tensorflow/tensorflow:2.7.0-gpu-jupyter
-#TODO: install openssh-client
+COPY initial_huggingface_download.py /tf/
 RUN \
     apt update && \
     DEBIAN_FRONTEND=noninteractive apt install -y \
@@ -17,4 +17,6 @@ RUN \
     channels_redis \
     datasets \
     tensorboard-plugin-profile==2.4.0 \
-    gitpython==3.1.17
+    gitpython==3.1.17 && \ 
+    python /tf/initial_huggingface_download.py
+
