@@ -24,16 +24,42 @@ if gpus:
         print(e)
 
 
+class feeling_need_guesser():
+    def __init__(self):
+        self.classifier = pipeline("zero-shot-classification", device=0)
+
+    
+    def get_feelings(self, input_string):
+
+        num_feelings = 5
+        num_needs = 3
+        hypothesis_template = "Am I feeling {}?"
+        feelings_results = self.classifier(input_string, feelings.base_feelings, hypothesis_template=hypothesis_template, multi_label=True)
+        feelings_results['labels'][:5]
+        used_needs = set()
+        updated_needs = needs.needs
+
+        my_string = "When I hear '"+input_string+"' I wonder if"
+
+        for idx, feeling in enumerate(feelings_results['labels'][:num_feelings]):
+            sequence = "When I hear "+input_string+" do I feel "+feeling
+            hypothesis_template = "because I have a need for {}?"
+            need_results = self.classifier(sequence, list(updated_needs), hypothesis_template=hypothesis_template,multi_label=True)
+            used_needs = used_needs.union(need_results['labels'][:num_needs])
+            updated_needs = set(needs.needs).difference(used_needs)
+            my_string += "\nyou're feeling "+feeling + " because you have a need for " 
+            for need in need_results['labels'][:num_needs]:
+                my_string += need+", "
+            
+
+        return my_string
+
 def parse_args():
     parser = argparse.ArgumentParser(description="Guess feelings and needs")
     parser.add_argument("input_text", help="The file or text. ")
     args = parser.parse_args()
 
     return args
-
-def get_feelings(input_string):
-    my_string = "When I hear '"+input_string+"' I wonder if you're feeling"
-    return my_string
 
 def main():
     args = parse_args()
