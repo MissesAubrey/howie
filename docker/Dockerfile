@@ -5,6 +5,7 @@ RUN \
     DEBIAN_FRONTEND=noninteractive apt install -y \
     openssh-client \
     libopenmpi-dev && \
+    python -m pip install --upgrade pip && \ 
     python -m pip install \
     tqdm \
     mpi4py \
@@ -16,7 +17,7 @@ RUN \
     channels \
     channels_redis \
     datasets \
-    tensorboard-plugin-profile==2.4.0 \
-    gitpython==3.1.17 && \ 
+    tensorboard-plugin-profile \
+    gitpython && \ 
     python /tf/initial_huggingface_download.py
 
