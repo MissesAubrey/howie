@@ -39,7 +39,7 @@ class feeling_need_guesser():
         used_needs = set()
         updated_needs = needs.needs
 
-        my_string = "When I hear '"+input_string+"' I wonder if"
+        my_string = "When I hear '"+input_string+"' I wonder if you're feeling "
 
         for idx, feeling in enumerate(feelings_results['labels'][:num_feelings]):
             sequence = "When I hear "+input_string+" do I feel "+feeling
@@ -47,10 +47,11 @@ class feeling_need_guesser():
             need_results = self.classifier(sequence, list(updated_needs), hypothesis_template=hypothesis_template,multi_label=True)
             used_needs = used_needs.union(need_results['labels'][:num_needs])
             updated_needs = set(needs.needs).difference(used_needs)
-            my_string += "\nyou're feeling "+feeling + " because you have a need for " 
+            my_string += "\n"+feeling + " because you have a need for " 
             for need in need_results['labels'][:num_needs]:
                 my_string += need+", "
             
+            my_string+="?"
 
         return my_string
 
