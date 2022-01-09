@@ -3,6 +3,8 @@ import json
 from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
 
+from howie.zero_shot_feelings import get_feelings
+
 class ChatConsumer(WebsocketConsumer):
     def connect(self):
         self.room_name = self.scope['url_route']['kwargs']['room_name']
@@ -26,7 +28,8 @@ class ChatConsumer(WebsocketConsumer):
     # Receive message from WebSocket
     def receive(self, text_data):
         text_data_json = json.loads(text_data)
-        message = text_data_json['message']
+        #message = text_data_json['message']
+        message = get_feelings(text_data_json['message'])
 
         # Send message to room group
         async_to_sync(self.channel_layer.group_send)(

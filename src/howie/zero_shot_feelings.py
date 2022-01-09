@@ -31,6 +31,10 @@ def parse_args():
 
     return args
 
+def get_feelings(input_string):
+    my_string = "When I hear '"+input_string+"' I wonder if you're feeling"
+    return my_string
+
 def main():
     args = parse_args()
     input_string = args.input_text
