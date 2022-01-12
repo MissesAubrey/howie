@@ -53,6 +53,7 @@ class feeling_need_guesser():
             
             my_string+="?"
 
+        my_string+="\n\n\n"
         return my_string
 
 def parse_args():
