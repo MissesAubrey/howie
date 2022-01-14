@@ -1,17 +1,14 @@
 # chat/consumers.py
 import json
-from asgiref.sync import async_to_sync
-from channels.generic.websocket import WebsocketConsumer
 
-from howie.zero_shot_feelings import feeling_need_guesser
-
-import json
 from channels.generic.websocket import AsyncWebsocketConsumer
+
+from .views import feeling_need_guesser_inst
 
 class ChatConsumer(AsyncWebsocketConsumer):
     def __init__(self):
         super(ChatConsumer,self).__init__()
-        self.my_guesser = feeling_need_guesser()
+        pass
 
     async def connect(self):
         self.room_name = self.scope['url_route']['kwargs']['room_name']
@@ -35,9 +32,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
     # Receive message from WebSocket
     async def receive(self, text_data):
         text_data_json = json.loads(text_data)
-        #message = text_data_json['message']
-        message = self.my_guesser.get_feelings(text_data_json['message'])
-        
+        message = text_data_json['message']        
+        message = feeling_need_guesser_inst(message)
         
 
         # Send message to room group
