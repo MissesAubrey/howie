@@ -17,8 +17,8 @@ stop-docker-container:
 	docker kill ${PROJECT_NAME}
 
 start-serving:
-	docker run -d --shm-size=1024m --name ${PROJECT_NAME}_serving --gpus all -p 8501:8501 \
-	--rm -it --mount type=bind,source="$(CWD)",target=/tf/${PROJECT_NAME} $(IMAGE_NAME)
+	docker run -d --shm-size=1024m --name ${PROJECT_NAME}_serving --gpus all -p 8501:8501 -p 8500:8500 \
+	--rm -it --mount type=bind,source="$(CWD)",target=/tf/${PROJECT_NAME}  tensorflow/serving
 	docker exec -it ${PROJECT_NAME}_serving bash
 
 stop-serving:
