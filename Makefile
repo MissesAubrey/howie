@@ -15,6 +15,15 @@ start-docker-container:
 stop-docker-container:
 	docker exec -it ${PROJECT_NAME} bash -c 'cd /tf/${PROJECT_NAME} ; rm -rf src/${PROJECT_NAME}.egg-info/'
 	docker kill ${PROJECT_NAME}
+
+start-serving:
+	docker run -d --shm-size=1024m --name ${PROJECT_NAME}_serving --gpus all -p 8501:8501 \
+	--rm -it --mount type=bind,source="$(CWD)",target=/tf/${PROJECT_NAME} $(IMAGE_NAME)
+	docker exec -it ${PROJECT_NAME}_serving bash
+
+stop-serving:
+	docker kill ${PROJECT_NAME}_serving
+
 log-into-container:
 	docker exec -w /tf/${PROJECT_NAME} -it ${PROJECT_NAME} bash
 start-tensorboard:
