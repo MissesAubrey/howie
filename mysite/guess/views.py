@@ -9,8 +9,9 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 def guess(request):
-    message = request.POST['message']
-    return HttpResponse("Hello, world!"+message)
+    #message = request.POST['message']
+    #return HttpResponse("Hello, world!"+message)
+    return render(request, 'guess/guess.html')
 
 def hello_world(request):
     return HttpResponse("Hello, world!")
@@ -20,3 +21,5 @@ def feeling_need_guesser_inst(message):
     my_guesser = feeling_need_guesser()
     result_message = my_guesser.get_feelings(message)
     return result_message
+
+    
