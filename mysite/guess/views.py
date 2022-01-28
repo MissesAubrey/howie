@@ -8,6 +8,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect
 
 # Create your views here.
+@login_required
 def guess(request):
     #message = request.POST['message']
     #return HttpResponse("Hello, world!"+message)
