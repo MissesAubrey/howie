@@ -8,6 +8,7 @@
   Hi {{ user.username }}!
   <p><a href="{% url 'logout' %}">Log Out</a></p>
   <p><a href="{% url 'index' %}">Create Room</a></p>
+  <p><a href="{% url 'change_password' %}">Change password</a></p>
 {% else %}
   <p>You are not logged in</p>
   <a href="{% url 'login' %}">Log In</a>
