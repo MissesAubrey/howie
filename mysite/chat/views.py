@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from django.contrib.auth.decorators import login_required
+
 
 from howie.zero_shot_feelings import feeling_need_guesser
 
@@ -18,3 +19,6 @@ def feeling_need_guesser_inst(message):
     my_guesser = feeling_need_guesser()
     result_message = my_guesser.get_feelings(message)
     return result_message
+
+def guess(request):
+    return HttpResponse("Hello, world!")
