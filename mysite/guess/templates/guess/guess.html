@@ -9,15 +9,40 @@
     <input id="chat-message-input" type="text" size="100"><br>
     <!--- <input id="chat-message-submit" type="button" value="Send"> -->
     <p><a href="{% url 'home' %}">Home</a></p>
+
+    <div id="demo">
+        <h2>Let AJAX change this text</h2>
+        <button type="button" onclick="loadDoc()">Change Content</button>
+    </div>
+
     <script>
+        function loadDoc() {
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function() {
+            document.getElementById("demo").innerHTML = this.responseText;
+            }
+        xhttp.open("GET", "hello", true);
+        xhttp.send();
+        }
         document.addEventListener("DOMContentLoaded", () => {
+
             const chatlog = document.getElementById("chat-log")
             const inputField = document.getElementById("chat-message-input")
             inputField.addEventListener("keydown", function(e) {
                 if (e.code === "Enter") {
                     let input = inputField.value;
-                    chatlog.value += (inputField.value + '\n');
+                    chatlog.value += (inputField.value + '\n\n');
                     inputField.value = "";
+
+                    const xhttp = new XMLHttpRequest();
+                    xhttp.onload = function() {
+                        chatlog.value  += this.responseText;
+                        }
+                    xhttp.open("GET", "hello", true);
+                    xhttp.send();
+                    
+
+
                 }
             });
         });
