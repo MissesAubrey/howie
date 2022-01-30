@@ -26,12 +26,13 @@ def hello_world(request):
 
 @login_required
 def my_guesser(request):
-    #print(dir(request))
-    print("method = ",request.method )
-    print("body = ",request.body.decode("utf-8") )
-    
-    
-    result_message = too_many_guessers.get_feelings(request.body.decode("utf-8"))
+    #print("method = ",request.method )
+    #print("body = ",request.body.decode("utf-8") )
+    decoded_message = request.body.decode("utf-8")
+    if  len(decoded_message) > 500:
+        result_message = "Not enough GPU memory. Please keep message below 500 characters"
+    else:
+        result_message = too_many_guessers.get_feelings(decoded_message)
 
     return JsonResponse({"my_data":result_message})
 
