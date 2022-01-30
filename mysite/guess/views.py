@@ -9,7 +9,7 @@ from django.shortcuts import render, redirect
 
 from django.http import JsonResponse
 
-import logging
+from howie.zero_shot_feelings import feeling_need_guesser
 
 # Create your views here.
 @login_required
@@ -23,11 +23,14 @@ def hello_world(request):
     return HttpResponse("Hello, world!")
 
 @login_required
-def feeling_need_guesser(request):
+def my_guesser(request):
     #print(dir(request))
     print("method = ",request.method )
-    print("body = ",request.body)
-    #return HttpResponse("Guessing")
-    return JsonResponse({"my_data":"yay data received"})
+    print("body = ",request.body.decode("utf-8") )
+    
+    my_guesser = feeling_need_guesser()
+    result_message = my_guesser.get_feelings(request.body.decode("utf-8"))
+
+    return JsonResponse({"my_data":result_message})
 
     
