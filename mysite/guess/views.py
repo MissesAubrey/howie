@@ -7,6 +7,10 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect
 
+from django.http import JsonResponse
+
+import logging
+
 # Create your views here.
 @login_required
 def guess(request):
@@ -14,13 +18,16 @@ def guess(request):
     #return HttpResponse("Hello, world!"+message)
     return render(request, 'guess/guess.html')
 
+@login_required
 def hello_world(request):
     return HttpResponse("Hello, world!")
 
-
-def feeling_need_guesser_inst(message):
-    my_guesser = feeling_need_guesser()
-    result_message = my_guesser.get_feelings(message)
-    return result_message
+@login_required
+def feeling_need_guesser(request):
+    #print(dir(request))
+    print("method = ",request.method )
+    print("body = ",request.body)
+    #return HttpResponse("Guessing")
+    return JsonResponse({"my_data":"yay data received"})
 
     
