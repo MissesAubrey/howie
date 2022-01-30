@@ -61,7 +61,8 @@
                         );
                         fetch(request)
                         .then(function(response) {return response.json()})
-                        .then(function(data) {chatlog.value += data.my_data +"\n"});
+                        .then(function(data) {chatlog.value += data.my_data +"\n"})
+                        .then(function(){chatlog.scrollTop = chatlog.scrollHeight});
                         
                     //#############
                     inputField.value = "";
