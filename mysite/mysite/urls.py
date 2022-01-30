@@ -19,7 +19,7 @@ from django.conf.urls import include
 from django.views.generic.base import TemplateView
 
 urlpatterns = [
-    path('chat/', include('chat.urls')),
+    #path('chat/', include('chat.urls')),
     path('guess/', include('guess.urls')),
     path('loginapps/', include('loginapps.urls')),
     path('testing/', TemplateView.as_view(template_name='testing/testing.html'), name='home'),

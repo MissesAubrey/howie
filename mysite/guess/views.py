@@ -11,6 +11,8 @@ from django.http import JsonResponse
 
 from howie.zero_shot_feelings import feeling_need_guesser
 
+too_many_guessers = feeling_need_guesser()
+
 # Create your views here.
 @login_required
 def guess(request):
@@ -28,8 +30,8 @@ def my_guesser(request):
     print("method = ",request.method )
     print("body = ",request.body.decode("utf-8") )
     
-    my_guesser = feeling_need_guesser()
-    result_message = my_guesser.get_feelings(request.body.decode("utf-8"))
+    
+    result_message = too_many_guessers.get_feelings(request.body.decode("utf-8"))
 
     return JsonResponse({"my_data":result_message})
 
