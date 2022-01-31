@@ -298,6 +298,6 @@ base_feelings = ['grief','relief', 'sadness','angry','mad','confused','hungry','
 my_list = []
 for feeling in nuanced_feelings:
     if feeling not in my_list:
-        my_list.append(feeling)
+        my_list.append(feeling.lower())
 
 nuanced_feelings = my_list

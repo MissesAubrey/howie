@@ -67,25 +67,11 @@ def main():
     args = parse_args()
     input_string = args.input_text
 
-    classifier = pipeline("zero-shot-classification", device=0)
+    too_many_guessers = feeling_need_guesser()
 
-    num_feelings = 5
-    num_needs = 5
-    hypothesis_template = "Am I feeling {}?"
-    feelings_results = classifier(input_string, feelings.base_feelings, hypothesis_template=hypothesis_template, multi_label=True)
-    feelings_results['labels'][:5]
-    used_needs = set()
-    updated_needs = needs.needs
-    print("When I hear "+ input_string + " do I feel ")
-    for idx, feeling in enumerate(feelings_results['labels'][:num_feelings]):
-        sequence = "When I hear "+input_string+" do I feel "+feeling
-        hypothesis_template = "because I have a need for {}?"
-        need_results = classifier(sequence, list(updated_needs), hypothesis_template=hypothesis_template,multi_label=True)
-        used_needs = used_needs.union(need_results['labels'][:num_needs])
-        updated_needs = set(needs.needs).difference(used_needs)
-        print(idx, feeling+" because I have a need for ",end="")
-        print(*need_results['labels'][:3],sep=", ",end="")
-        print(", and " + need_results['labels'][3]+"?",sep=", ")
+    result_message = too_many_guessers.get_feelings(input_string)
+
+    print(result_message)
 
 if __name__ =="__main__":
     main()
