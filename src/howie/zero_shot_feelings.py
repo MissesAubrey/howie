@@ -35,9 +35,14 @@ class feeling_need_guesser():
 
         num_feelings = self.num_feelings
         num_needs = self.num_needs
+
+        feelings_list = list(feelings.base_feelings)
+
         hypothesis_template = "Am I feeling {}?"
-        feelings_results = self.classifier(input_string, feelings.base_feelings, hypothesis_template=hypothesis_template, multi_label=True)
-        feelings_results['labels'][:5]
+        feelings_results = self.classifier(input_string, feelings_list, hypothesis_template=hypothesis_template, multi_label=True)
+
+        #nuanced_feelings_results = self.classifier(input_string, feelings_list, hypothesis_template=hypothesis_template, multi_label=True)
+
         used_needs = set()
         updated_needs = needs.needs
 
