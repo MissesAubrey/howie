@@ -26,7 +26,7 @@ def hello_world(request):
 
 @login_required
 def my_guesser(request):
-    #print("method = ",request.method )
+    print("method = ",request.method )
     #print("body = ",request.body.decode("utf-8") )
     decoded_message = request.body.decode("utf-8")
     if  len(decoded_message) > 500:
