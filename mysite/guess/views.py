@@ -1,3 +1,5 @@
+import json
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, HttpResponse
 from howie.zero_shot_feelings import feeling_need_guesser
@@ -26,13 +28,22 @@ def hello_world(request):
 
 @login_required
 def my_guesser(request):
-    print("method = ",request.method )
-    #print("body = ",request.body.decode("utf-8") )
-    decoded_message = request.body.decode("utf-8")
+    if (False):
+        print('request.body = ', request.body)
+        print("method = ",request.method )
+        print("request.body.decode('utf-8') = ", request.body.decode("utf-8"))
+        print("type(request.body.decode('utf-8')) = ", type(request.body.decode("utf-8")))
+        print("json.loads(request.body.decode('utf-8')) = ", json.loads(request.body.decode("utf-8")))
+ 
+
+    decoded_message = json.loads(request.body.decode("utf-8"))
+    print("decoded_message['story'] = ",decoded_message['story'])
+    
+    
     if  len(decoded_message) > 500:
         result_message = "Not enough GPU memory. Please keep message below 500 characters"
     else:
-        result_message = too_many_guessers.get_feelings(decoded_message)
+        result_message = too_many_guessers.get_feelings(decoded_message['story'])
 
     return JsonResponse({"my_data":result_message})
 

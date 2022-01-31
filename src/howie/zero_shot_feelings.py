@@ -27,12 +27,14 @@ if gpus:
 class feeling_need_guesser():
     def __init__(self):
         self.classifier = pipeline("zero-shot-classification", device=0)
+        self.num_feelings = 5
+        self.num_needs = 3
 
     
     def get_feelings(self, input_string):
 
-        num_feelings = 5
-        num_needs = 3
+        num_feelings = self.num_feelings
+        num_needs = self.num_needs
         hypothesis_template = "Am I feeling {}?"
         feelings_results = self.classifier(input_string, feelings.base_feelings, hypothesis_template=hypothesis_template, multi_label=True)
         feelings_results['labels'][:5]

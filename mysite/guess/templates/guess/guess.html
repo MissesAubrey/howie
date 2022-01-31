@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8"/>
     <title>Chat Room</title>
@@ -8,6 +8,18 @@
     <textarea id="chat-log" cols="100" rows="20"></textarea><br>
     <input id="chat-message-input" type="text" size="100"><br>
     <!--- <input id="chat-message-submit" type="button" value="Send"> -->
+
+    <label for="n_feelings">Number of feelings</label>
+
+    <select name="n_feelings" id="n_feelings">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="4">5</option>
+    </select>
+
+
     <p><a href="{% url 'home' %}">Home</a></p>
 
 
@@ -56,7 +68,9 @@
                                         'X-CSRFToken': csrftoken,
                                     },
                             credentials: 'same-origin', // Do not send CSRF token to another domain.
-                            body: inputField.value
+                            body:JSON.stringify({
+                                    'story': inputField.value
+                                })
                         }
                         );
                         fetch(request)
