@@ -19,6 +19,16 @@
       <option value="4">5</option>
     </select>
 
+    <label for="n_needs">Number of needs</label>
+
+    <select name="n_needs" id="n_needs">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="4">5</option>
+    </select>
+
 
     <p><a href="{% url 'home' %}">Home</a></p>
 
@@ -45,6 +55,8 @@
 
             const chatlog = document.getElementById("chat-log")
             const inputField = document.getElementById("chat-message-input")
+            const num_feelings = document.getElementById("n_feelings")
+            const num_needs = document.getElementById("n_needs")
             inputField.addEventListener("keydown", function(e) {
                 if (e.code === "Enter") {
                     let input = inputField.value;
@@ -69,7 +81,9 @@
                                     },
                             credentials: 'same-origin', // Do not send CSRF token to another domain.
                             body:JSON.stringify({
-                                    'story': inputField.value
+                                    'story': inputField.value,
+                                    'num_feelings': num_feelings.value,
+                                    'num_needs': num_needs.value,
                                 })
                         }
                         );

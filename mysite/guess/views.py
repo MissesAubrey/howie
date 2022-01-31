@@ -28,7 +28,7 @@ def hello_world(request):
 
 @login_required
 def my_guesser(request):
-    if (False):
+    if (True):
         print('request.body = ', request.body)
         print("method = ",request.method )
         print("request.body.decode('utf-8') = ", request.body.decode("utf-8"))
@@ -36,14 +36,16 @@ def my_guesser(request):
         print("json.loads(request.body.decode('utf-8')) = ", json.loads(request.body.decode("utf-8")))
  
 
-    decoded_message = json.loads(request.body.decode("utf-8"))
-    print("decoded_message['story'] = ",decoded_message['story'])
+    body = json.loads(request.body.decode("utf-8"))
+    print("decoded_message['story'] = ",body['story'])
     
     
-    if  len(decoded_message) > 500:
+    if  len(body['story']) > 500:
         result_message = "Not enough GPU memory. Please keep message below 500 characters"
     else:
-        result_message = too_many_guessers.get_feelings(decoded_message['story'])
+        too_many_guessers.num_needs = int(body['num_needs'])
+        too_many_guessers.num_feelings = int(body['num_feelings'])
+        result_message = too_many_guessers.get_feelings(body['story'])
 
     return JsonResponse({"my_data":result_message})
 
