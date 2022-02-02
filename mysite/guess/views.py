@@ -1,4 +1,6 @@
+import os
 import json
+import requests
 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, HttpResponse
@@ -8,6 +10,7 @@ from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect
+from django.conf import settings
 
 from django.http import JsonResponse
 
@@ -25,6 +28,16 @@ def guess(request):
 @login_required
 def hello_world(request):
     return HttpResponse("Hello, world!")
+
+@login_required
+def my_guess_style(request):
+    css_path = os.path.join(settings.BASE_DIR,'mysite/static/guess/style.css')
+    my_file = open(css_path, 'r')
+    #response = HttpResponse(content=requests.get("http://localhost:3000/static/guess/style.css").text)
+    response = HttpResponse(content=my_file.read())
+    response['Content-Type'] = 'text/css'
+
+    return response
 
 @login_required
 def my_guesser(request):
