@@ -2,10 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
+    <link rel="stylesheet" type="text/css" href="static/guess">
     <title>Chat Room</title>
 </head>
 <body>
-    <textarea id="chat-log" cols="100" rows="20"></textarea><br>
+    <!--<textarea id="chat-log" cols="100" rows="20"></textarea><br>-->
+
+    <div id="fancy-log" class="imessage">
+        <p class="from-them">Hello, how's your day going?</p>
+    </div>
     <input id="chat-message-input" type="text" size="100"><br>
     <!--- <input id="chat-message-submit" type="button" value="Send"> -->
 
@@ -36,6 +41,20 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
 
+
+        function addElement (my_text,from_whom) {
+            
+            const newText = document.createTextNode(my_text);
+            const para = document.createElement("p");
+            para.setAttribute("class", from_whom);
+            para.appendChild(newText);
+            
+            const my_div = document.getElementById("fancy-log");
+            
+            my_div.appendChild(para)
+
+        }
+
             function getCookie(name) {
             let cookieValue = null;
             if (document.cookie && document.cookie !== '') {
@@ -53,15 +72,16 @@
           }
           const csrftoken = getCookie('csrftoken');
 
-            const chatlog = document.getElementById("chat-log")
+            //const chatlog = document.getElementById("chat-log")
             const inputField = document.getElementById("chat-message-input")
             const num_feelings = document.getElementById("n_feelings")
             const num_needs = document.getElementById("n_needs")
             inputField.addEventListener("keydown", function(e) {
                 if (e.code === "Enter") {
                     let input = inputField.value;
-                    chatlog.value += (inputField.value + '\n\n');
+                    //chatlog.value += (inputField.value + '\n\n');
 
+                    addElement(inputField.value,"from-me");
                     //const xhttp = new XMLHttpRequest();
                     //xhttp.onload = function() {
                     //    chatlog.value  += this.responseText;
@@ -89,8 +109,11 @@
                         );
                         fetch(request)
                         .then(function(response) {return response.json()})
-                        .then(function(data) {chatlog.value += data.my_data +"\n"})
-                        .then(function(){chatlog.scrollTop = chatlog.scrollHeight});
+                        .then(function(data) {
+                            //chatlog.value += data.my_data +"\n";
+                            addElement(data.my_data,"from-them")
+                        });
+                        //.then(function(){chatlog.scrollTop = chatlog.scrollHeight});
                         
                     //#############
                     inputField.value = "";
