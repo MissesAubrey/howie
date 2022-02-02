@@ -29,7 +29,7 @@ GPU: NVIDIA(R) GeForce(R) RTX 2060 SUPER(TM) 8GB GDDR6
 
     #inside docker container, start the web app to allow other people to eventually use
     cd mysite
-    python manage.py runserver 0:8000
+    python manage.py runserver 0:80
     
     
 
