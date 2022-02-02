@@ -52,6 +52,8 @@
             const my_div = document.getElementById("fancy-log");
             
             my_div.appendChild(para)
+            var scrollingElement = (document.scrollingElement || document.body);
+            scrollingElement.scrollTop = scrollingElement.scrollHeight;
 
         }
 
@@ -73,6 +75,7 @@
           const csrftoken = getCookie('csrftoken');
 
             //const chatlog = document.getElementById("chat-log")
+            const my_div = document.getElementById("fancy-log");
             const inputField = document.getElementById("chat-message-input")
             const num_feelings = document.getElementById("n_feelings")
             const num_needs = document.getElementById("n_needs")
