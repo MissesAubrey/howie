@@ -41,17 +41,17 @@ def my_guess_style(request):
 
 @login_required
 def my_guesser(request):
-    if (True):
+
+    body = json.loads(request.body.decode("utf-8"))
+    if (False):
         print('request.body = ', request.body)
         print("method = ",request.method )
         print("request.body.decode('utf-8') = ", request.body.decode("utf-8"))
         print("type(request.body.decode('utf-8')) = ", type(request.body.decode("utf-8")))
         print("json.loads(request.body.decode('utf-8')) = ", json.loads(request.body.decode("utf-8")))
- 
+        print("decoded_message['story'] = ",body['story'])
 
-    body = json.loads(request.body.decode("utf-8"))
-    print("decoded_message['story'] = ",body['story'])
-    
+    print("method = ",request.method )
     
     if  len(body['story']) > 500:
         result_message = "Not enough GPU memory. Please keep message below 500 characters"

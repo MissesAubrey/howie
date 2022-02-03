@@ -8,7 +8,7 @@
 <body>
     <!--<textarea id="chat-log" cols="100" rows="20"></textarea><br>-->
 
-    <div id="fancy-log" class="imessage">
+    <div id="fancy-log" class="imessage" style="height: 800px; overflow-y: scroll;">
         <p class="from-them">Hello, how's your day going?</p>
     </div>
     <input id="chat-message-input" type="text" size="100"><br>
@@ -52,8 +52,7 @@
             const my_div = document.getElementById("fancy-log");
             
             my_div.appendChild(para)
-            var scrollingElement = (document.scrollingElement || document.body);
-            scrollingElement.scrollTop = scrollingElement.scrollHeight;
+            my_div.scrollTop = my_div.scrollHeight;
 
         }
 
