@@ -51,7 +51,7 @@ def my_guesser(request):
         print("json.loads(request.body.decode('utf-8')) = ", json.loads(request.body.decode("utf-8")))
         print("decoded_message['story'] = ",body['story'])
 
-    print("method = ",request.method )
+    print("method = ",request.method, "user = ", request.user)
     
     if  len(body['story']) > 500:
         result_message = "Not enough GPU memory. Please keep message below 500 characters"
