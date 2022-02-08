@@ -15,22 +15,25 @@ RAM: 64GB, 2x32GB, DDR4, 2933Mhz
 CPU: 10th Gen Intel(R) Core(TM) i7-10700 processor(8-Core, 16M Cache, 2.9GHz to 4.8GHz) 
 GPU: NVIDIA(R) GeForce(R) RTX 2060 SUPER(TM) 8GB GDDR6
 
+## Description
+
+This code base is a proof of concept implementation of "giraffe ears" as described in nonviolent communication using a [huggingface](https://huggingface.co/) backend.  For more resources on nonviolent communication, please see https://www.cnvc.org/
+
 ## Quick Start:
 
     make build-docker
     make start-docker-container
     make log-into-continer
 
-    #outside the docker container
-    docker run -p 6379:6379 -d redis:5
-
     #inside the docker container
     giraffe_ears "My pup was biting my sleeve while I was working because it was dinner time"
 
-    #inside docker container, start the web app to allow other people to eventually use
+    # a django based web app exposing the 
     cd mysite
     python manage.py runserver 0:80
     
+    #outside the docker container
+    docker run -p 6379:6379 -d redis:5
     
 
     # the jupyter port is 8888

@@ -44,11 +44,16 @@ if gpus:
 
 class feeling_need_guesser():
     def __init__(self):
-        self.classifier = pipeline("zero-shot-classification", device=0)
+        self.classifier = pipeline("zero-shot-classification", model="roberta-large-mnli",device=0)
+        #self.summarizer = pipeline("summarization", model="t5-base", tokenizer="t5-base", framework="tf")
         self.num_feelings = 5
         self.num_needs = 3
 
     
+    #def summarize(self, input_string):
+    #    my_string = self.summarizer(input_string, min_length=5, max_length=30)
+    #    return my_string[0]["summary_text"]
+
     def get_feelings(self, input_string):
 
         num_feelings = self.num_feelings

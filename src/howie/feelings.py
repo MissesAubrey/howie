@@ -314,8 +314,8 @@ body_feelings = ['hungry', 'tired', 'thirsty', 'cold','hot', 'itchy','sick','nau
                  'disgust', 'uncomfortable', 'compressed', 'stressed', 'difficulty breathing', 'energetic', 'sore', 'stinging', 'stuffed',
                  '','burning' ]
 
-base_feelings = ['grief','relief', 'sadness','angry','mad','confused','hungry','thirsty','warm','cold',
-                 'playful','amused','scared','afraid','exhausted','peaceful','calm','tranquil','eager',
+base_feelings = ['grief','relief', 'sad','angry','mad','confused','hungry','thirsty','warm','hot','cold',
+                 'playful','amused','scared','afraid','exhausted','tired','peaceful','calm','tranquil','eager',
                  'excited','aggravated','frustrated','affectionate','appreciative','tender','pain','shame','grateful','anxious','disgust']
 
 my_list = []
